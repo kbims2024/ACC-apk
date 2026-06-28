@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Arial", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Arial", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-50: #f0f5ff;
+  --color-brand-100: #e0ebff;
+  --color-brand-400: #4d94ff;
+  --color-brand-500: #1a75ff;
+  --color-brand-600: #0055FF;
+  --color-brand-700: #0044cc;
+  --color-brand-900: #002266;
+  
+  --color-accent-50: #fffdf0;
+  --color-accent-100: #fff9c2;
+  --color-accent-400: #ffe600;
+  --color-accent-500: #ffcc00;
+  --color-accent-600: #e5b800;
+  --color-accent-700: #b38f00;
+}
+
+@font-face {
+  font-family: 'Twemoji Country Flags';
+  unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065-E0067, U+E006C, U+E006E, U+E0073-E0074, U+E0077, U+E007F;
+  src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+  font-display: swap;
+}
+
+body {
+  @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300;
+  font-family: "Twemoji Country Flags", "Arial", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for better UI */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}

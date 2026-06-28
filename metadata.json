@@ -1,0 +1,6 @@
+{
+  "name": "ArtisanChapChap",
+  "description": "Plombiers, électriciens, peintres... Artisan Chap Chap vous met en relation instantanément avec des professionnels vérifiés près de chez vous.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": []
+}

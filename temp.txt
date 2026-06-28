@@ -1,0 +1,140 @@
+102:  const { user, token, setUser, login, logout } = useAuthStore();
+106:    (user?.referralStats?.totalRevenue || 0) -
+107:    (user?.referralStats?.transferredRevenue || 0);
+317:    if (!user || user.role !== "worker" || !user.subscription?.activeUntil)
+321:      const activeUntil = new Date(user.subscription.activeUntil).getTime();
+345:  }, [user]);
+365:    if (!user) {
+375:    const parsedPhone = parsePhone(user.phone);
+376:    const parsedWhatsApp = parsePhone(user.whatsappPhone);
+379:      name: user.name || "",
+380:      email: user.email || "",
+385:      companyName: user.companyName || "",
+386:      profession: user.profession || "",
+387:      country: user.country || "Côte d'Ivoire",
+388:      location: user.location || "",
+389:      shortDescription: user.shortDescription || "",
+390:      videoUrl: user.videoUrl || "",
+391:      description: user.description || "",
+392:      hourlyRate: user.hourlyRate || "",
+393:      photo: user.photo || "",
+394:      portfolio: user.portfolio || [],
+395:      availWeekdays: user.availWeekdays || "08:00 - 18:00",
+396:      availSaturday: user.availSaturday || "09:00 - 14:00",
+397:      availSunday: user.availSunday || "Fermé",
+401:    if (user.role !== "worker") {
+404:  }, [user, navigate]);
+415:    if (!user?._id) return;
+423:      socketRef.current?.emit("join", user._id);
+454:          if (lastResponse.senderId !== user?._id) {
+482:    socketRef.current.on("userStatus", ({ userId, status }) => {
+485:        if (status === "online") next.add(userId);
+486:        else next.delete(userId);
+495:          if (s.status === "online") next.add(s.userId);
+496:          else next.delete(s.userId);
+507:  }, [user?._id]);
+510:    const amIWorkerForThisReq = String(req.workerId?._id || req.workerId) === String(user?._id);
+511:    if (user?.role === "worker" && !req.tenderId && amIWorkerForThisReq) {
+512:      const activeUntil = user.subscription?.activeUntil
+513:        ? new Date(user.subscription.activeUntil).getTime()
+525:        const isExpired = !!user.subscription?.activeUntil;
+527:          ? new Date(user.subscription!.activeUntil!).toLocaleDateString()
+874:      const res = await fetch("/api/users/transfer-affiliate", {
+886:      login(data.user, token!); // update user in context
+904:      const res = await fetch(`/api/users/transfer-history?type=${type}`, {
+1064:      const res = await fetch("/api/users/me", {
+1096:        setUser({ ...user, ...data });
+1240:    if (user?.kycStatus === "pending") {
+1243:          const res = await fetch("/api/users/me", {
+1262:  }, [user?.kycStatus, token, setUser]);
+1267:      const res = await fetch("/api/users/me", {
+1308:            const userId = new Uint8Array(16);
+1309:            window.crypto.getRandomValues(userId);
+1315:                user: {
+1316:                  id: userId,
+1317:                  name: user?.email || "user",
+1318:                  displayName: user?.name || "User",
+1326:                  userVerification: "required",
+1357:        await fetch("/api/users/me", {
+1370:          JSON.stringify({ email: user?.email, biometricKey }),
+1373:        setUser({ ...user!, fingerprintEnabled: true });
+1384:        await fetch("/api/users/me", {
+1395:        setUser({ ...user!, fingerprintEnabled: false });
+1405:  const referralLink = `${window.location.origin}/register?ref=${user?.referralCode || ""}`;
+1408:    navigator.clipboard.writeText(user?.referralCode || "");
+1415:      text: `Utilise mon code de parrainage ${user?.referralCode || ""} lors de ton inscription sur Artisan ChapChap !`,
+1438:      text: `J'utilise Artisan ChapChap (la plateforme n°1 des artisans). Inscris-toi avec mon code de parrainage ${user?.referralCode || ""} et commençons à gagner !`,
+1464:      const res = await fetch("/api/users/me", {
+1493:        `/api/users/workers/${selectedRequest.workerId._id}/reviews`,
+1536:      const res = await fetch("/api/users/withdraw", {
+1549:        setUser(data.user);
+1568:  if (!user) return null;
+1570:  const isWorker = user.role === "worker";
+1572:    user &&
+1574:    (req.clientId === user._id || req.clientId._id === user._id);
+1781:                        (user.referralStats?.totalRevenue || 0) -
+1782:                        (user.referralStats?.transferredRevenue || 0)
+1873:                      const userCountry = user?.country;
+1876:                      ).find((c: any) => c.country === userCountry);
+1894:                      const userCountry = user?.country;
+1897:                      ).find((c: any) => c.country === userCountry);
+1898:                      const localMethods = userCountry
+1899:                        ? LOCAL_PAYMENT_METHODS_BY_COUNTRY[userCountry] || []
+2171:                      const userCountry = user?.country;
+2174:                      ).find((c: any) => c.country === userCountry);
+2192:                      const userCountry = user?.country;
+2195:                      ).find((c: any) => c.country === userCountry);
+2196:                      const localMethods = userCountry
+2197:                        ? LOCAL_PAYMENT_METHODS_BY_COUNTRY[userCountry] || []
+2277:          {user.photo ? (
+2279:              src={user.photo}
+2280:              alt={user.name}
+2285:              {user.name.charAt(0).toUpperCase()}
+2318:                {user.name}
+2321:              {user.kycStatus === "verified" && (
+2352:                  {user.subscription?.activeUntil &&
+2353:                  new Date(user.subscription.activeUntil) >= new Date()
+2355:                    : user.subscription?.activeUntil
+2365:            {user.subscription?.activeUntil &&
+2366:            new Date(user.subscription.activeUntil) >= new Date() ? (
+2378:              {user.subscription?.activeUntil &&
+2379:              new Date(user.subscription.activeUntil) >= new Date()
+2452:      {isWorker && !user.photo && (
+2483:      {user.kycStatus !== "verified" && (
+2495:                {user.kycStatus === "pending"
+2497:                  : user.kycStatus === "rejected"
+2502:                {user.kycStatus === "pending"
+2504:                  : user.kycStatus === "rejected"
+2511:          {user.kycStatus !== "pending" && (
+2526:          {user.kycStatus === "pending" && (
+2583:          {user.role !== "admin" &&
+2584:            (!user.subscription?.activeUntil ||
+2585:              new Date(user.subscription.activeUntil) < new Date()) && (
+2608:                  {user.referralStats?.l1Count || 0}
+2616:                  {user.referralStats?.l2Count || 0}
+2624:                  {(user.referralStats?.totalRevenue || 0).toLocaleString()}{" "}
+2635:                        user.referralStats?.transferredRevenue || 0
+2646:                        (user.referralStats?.totalRevenue || 0) -
+2647:                        (user.referralStats?.transferredRevenue || 0)
+2659:                  {(user.referralStats?.l1Revenue || 0).toLocaleString()}{" "}
+2668:                  {(user.referralStats?.l2Revenue || 0).toLocaleString()}{" "}
+2721:                    if (user.kycStatus !== "verified") {
+2757:                  {user.referralCode || "----"}
+2990:                {(!user?.subscription?.activeUntil ||
+2991:                  new Date(user.subscription.activeUntil).getTime() <=
+2992:                    new Date().getTime()) && requests.some(r => String(r.workerId?._id || r.workerId) === String(user?._id)) && (
+2999:                      const incomingRequests = requests.filter(r => String(r.workerId?._id || r.workerId) === String(user?._id));
+3011:                      const isExpired = !!user?.subscription?.activeUntil;
+3014:                            user.subscription!.activeUntil!,
+3134:              const amIWorkerForThisReq = String(req.workerId?._id || req.workerId) === String(user?._id);
+3282:                              !(r.deletedFor || []).includes(user?._id),
+3286:                              String(res.senderId) === String(user?._id);
+3486:          const amIWorkerForThisReq = String(selectedRequest.workerId?._id || selectedRequest.workerId) === String(user?._id);
+3548:                        "url('https://camo.githubusercontent.com/92ebacfb0f681a2da38e8ec88939c4c4dc8c9a3bf00fba681a7ce74fa49320b9/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131306234303866303735642e706e67')",
+3637:                        (r: any) => !(r.deletedFor || []).includes(user?._id),
+3640:                        const isMe = String(res.senderId) === String(user?._id);
+3772:                      (!user?.subscription?.activeUntil ||
+3773:                        new Date(user.subscription.activeUntil) <
+4266:                              {user.email}
+4289:                                    email: user.email,
+4322:                                ? (user as any)?.password || "Non défini"
