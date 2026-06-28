@@ -34,14 +34,17 @@ jobs:
         run: npx cap sync android
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.2.1'
 
       - name: Build APK
         run: |
           cd android
-          gradle assembleDebug
+          rm -f gradle/wrapper/gradle-wrapper.jar
+          curl -sL https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar -o gradle/wrapper/gradle-wrapper.jar
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
