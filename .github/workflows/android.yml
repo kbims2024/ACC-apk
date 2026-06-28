@@ -42,6 +42,7 @@ jobs:
       - name: Build APK
         run: |
           cd android
+          rm -rf gradle/wrapper
           gradle assembleDebug
 
       - name: Upload APK Artifact
